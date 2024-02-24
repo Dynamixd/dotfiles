@@ -11,9 +11,10 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
+    impermanence.url = "github:nix-community/impermanence";
   };
   
-  outputs = inputs@{ self, nixpkgs, home-manager, ...}:
+  outputs = inputs@{ self, nixpkgs, home-manager, impermanence, ...}:
   let
     system = "x86_64-linux";
     username = "zach";

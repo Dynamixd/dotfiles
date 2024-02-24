@@ -15,7 +15,7 @@ lib.mkIf ("${waybarStyle}" == "style2") {
 
       modules-left = [ "custom/startmenu" "hyprland/window" ];
       modules-center = [ "network" "pulseaudio" "cpu" "hyprland/workspaces" "memory" "disk" "clock" ];
-      modules-right = [ "idle_inhibitor" "custom/themeselector" "custom/notification" "battery" "tray" ];
+      modules-right = [ "custom/audio_idle_inhibitor" "custom/themeselector" "custom/notification" "battery" "tray" ];
       "hyprland/workspaces" = {
       	format = "{icon}";
       	format-icons = {
@@ -95,6 +95,18 @@ lib.mkIf ("${waybarStyle}" == "style2") {
             deactivated = " ";
         };
         tooltip = "true";
+      };
+      "custom/audio_idle_inhibitor" = {
+        format = "{icon}";
+        exec = "sway-audio-idle-inhibit --dry-print-both-waybar";
+        exec-if = "which sway-audio-idle-inhibit";
+        return-type = "json";
+        format-icons = {
+          output = "";
+          input = "";
+          output-input = "  ";
+          none = "";
+        };
       };
       "custom/notification" = {
         tooltip = false;
@@ -272,12 +284,12 @@ lib.mkIf ("${waybarStyle}" == "style2") {
     		margin: 4px;
     		padding: 2px 10px 2px 13px;
 	}
-	#idle_inhibitor {
+	#custom-audio_idle_inhibitor {
     		color: #${palette.base09};
     		background: #${palette.base01};
     		border-radius: 10px;
     		margin: 4px;
-    		padding: 2px 10px 2px 13px;
+    		padding: 2px 14px 2px 10px;
 	}
     '';
   };

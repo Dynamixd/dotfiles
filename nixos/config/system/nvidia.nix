@@ -30,10 +30,15 @@
     open = false;
     nvidiaSettings = true;
 #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
     prime = {
-      sync = {
-        enable = true;
-      };
+      # offload = {
+        # enable = true;
+        # enableOffloadCmd = true;
+      # };
+    sync = {
+      enable = true;
+    };
       intelBusId = "PCI:00:02:0";
       nvidiaBusId = "PCI:01:00:0";
     };

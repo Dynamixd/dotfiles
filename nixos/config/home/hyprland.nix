@@ -18,36 +18,20 @@ let
        modifier2 = "ALT";
       in concatStrings [ ''
       monitor=HDMI-A-1,1920x1080@60,0x0,1
-      monitor=eDP-1,1920x1080@60,1920x512,1x
+      monitor=eDP-1,1920x1080@144,1920x512,1x
       windowrule = float, ^(steam)$
       windowrule = center, ^(steam)$
-      windowrule = size 1080 900, ^(steam)$
-#
+      windowrule = size 1280 900, ^(steam)$
+      windowrule = float, ^(discord)$
+      windowrule = center, ^(discord)$
+      windowrule = size 1280 900, ^(discord)$
       
       misc {
         force_default_wallpaper = 0 # Set to 0 to disable the anime mascot wallpapers
-        vrr = 1 
+        vrr = 0 
         disable_hyprland_logo = true
         disable_splash_rendering = true
         background_color = rgba(2A2A4Dff)
-      }
-
-      decoration {
-          # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-          rounding = 5 
-          
-          blur {
-              enabled = true
-              new_optimizations
-              size = 3 
-              passes = 1
-          }
-
-          drop_shadow = yes
-          shadow_range = 4
-          shadow_render_power = 3
-          col.shadow = rgba(1a1a1aee)
       }
 
       }
@@ -74,6 +58,7 @@ let
         sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
         accel_profile = flat
       }
+
       env = NIXOS_OZONE_WL, 1
       env = NIXPKGS_ALLOW_UNFREE, 1
       env = XDG_CURRENT_DESKTOP, Hyprland
@@ -89,12 +74,15 @@ let
       env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
       env = MOZ_ENABLE_WAYLAND, 1
       env = WLR_NO_HARDWARE_CURSORS,1
+
+      
       misc {
         mouse_move_enables_dpms = true
         key_press_enables_dpms = true
         focus_on_activate = true
 
       }
+
       animations {
         enabled = yes
         bezier = wind, 0.05, 0.9, 0.1, 1.05
@@ -109,6 +97,7 @@ let
         animation = fade, 1, 10, default
         animation = workspaces, 1, 5, wind
       }
+
       decoration {
         rounding = 10
         drop_shadow = false
@@ -120,38 +109,44 @@ let
             ignore_opacity = on
         }
       }
+
       plugin {
         hyprtrails {
           color = rgba(${theme.base0A}ff)
         }
       }
+
       exec-once = $POLKIT_BIN
       exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
       exec-once = hyprctl setcursor graphite-dark 24
       exec-once = waybar
       exec-once = swaync
-      exec-once = wallsetter
+#      exec-once = wallsetter
       exec-once = swayidle -w timeout 720 'swaylock -f' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
-      exec-once = swww init
-      exec-once = swww img ${wallpaperDir}/Rainnight.jpg
+      exec-once = sway-audio-idle-inhibit
+      exec-once = sleep .5 && swww init && swww img ${wallpaperDir}/Rainnight.jpg
 
       dwindle {
         pseudotile = true
         preserve_split = true
       }
+
       master {
         new_is_master = true
       }
+
       bindl = ${modifier},T,exec,kitty
       bindr = ${modifier},W,exec,pkill rofi || rofi -show drun
       bind = ${modifier},B,exec,${browser}
       bind = ${modifier},F,exec,thunar
+      bind = ${modifier},D,exec,discord --use-angle=vulkan
       bind = ${modifier},Q,exec,dontkillsteam # killactive, kill the window on focus
       bind = ${modifier2}, F4, exec,dontkillsteam # killactive, kill the window on focus
       bind = ${modifier},P,pseudo,
       bind = ${modifier}SHIFT,I,togglesplit,
       bind = ${modifier}, F11,fullscreen,
+      bind = ${modifier}, F12,exec, screenshootin
       bind = ${modifier}SHIFT,F,togglefloating,
       bind = ${modifier}SHIFT,C,exit,
       bindl = ${modifier2},Tab,cyclenext,          # change focus to another window
@@ -215,8 +210,8 @@ let
       windowrulev2 = opacity 0.95 0.95,class:^(firefox)$
       windowrulev2 = opacity 0.90 0.90,class:^(Brave-browser)$
       windowrulev2 = opacity 0.80 0.80,class:^(Steam)$
-      windowrulev2 = opacity 0.80 0.80,class:^(steam)$
-      windowrulev2 = opacity 0.80 0.80,class:^(steamwebhelper)$
+#      windowrulev2 = opacity 0.80 0.80,class:^(steam)$
+#      windowrulev2 = opacity 0.80 0.80,class:^(steamwebhelper)$
       windowrulev2 = opacity 0.80 0.80,class:^(Spotify)$
       windowrulev2 = opacity 0.80 0.80,class:^(Code)$
       windowrulev2 = opacity 0.80 0.80,class:^(code-url-handler)$
@@ -231,7 +226,7 @@ let
       windowrulev2 = opacity 0.80 0.80,class:^(hu.kramo.Cartridges)$ #Cartridges-Gtk
       windowrulev2 = opacity 0.80 0.80,class:^(com.obsproject.Studio)$ #Obs-Qt
       windowrulev2 = opacity 0.80 0.80,class:^(gnome-boxes)$ #Boxes-Gtk
-      windowrulev2 = opacity 0.80 0.80,class:^(discord)$ #Discord-Electron
+#      windowrulev2 = opacity 0.80 0.80,class:^(discord)$ #Discord-Electron
       windowrulev2 = opacity 0.80 0.80,class:^(WebCord)$ #WebCord-Electron
       windowrulev2 = opacity 0.80 0.80,class:^(app.drey.Warp)$ #Warp-Gtk
       windowrulev2 = opacity 0.80 0.80,class:^(net.davidotek.pupgui2)$ #ProtonUp-Qt

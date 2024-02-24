@@ -13,7 +13,6 @@ in {
     alsa-utils
     blueman
     element-desktop
-    dunst
     libvirt 
     transmission-gtk
     swww 
@@ -22,9 +21,11 @@ in {
     mpv 
     gimp 
     font-awesome 
-    pavucontrol
     swayidle
     swaylock-effects
+    sway-audio-idle-inhibit
+    android-tools
+    xemu
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   programs.gh.enable = true;
