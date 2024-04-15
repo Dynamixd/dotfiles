@@ -7,25 +7,22 @@ in {
   # Install Packages For The User
   home.packages = with pkgs; [
     firefox-wayland
-    zip
     kitty
-    unzip
-    alsa-utils
     blueman
-    element-desktop
-    libvirt 
-    transmission-gtk
     swww 
     rofi-wayland 
-    imv 
-    mpv 
-    gimp 
     font-awesome 
     swayidle
     swaylock-effects
     sway-audio-idle-inhibit
-    android-tools
-    xemu
+    ntfs3g
+    remmina
+    transmission_4-qt
+    mullvad
+    wineWowPackages.waylandFull
+    winetricks
+    ferium
+    prismlauncher
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   programs.gh.enable = true;

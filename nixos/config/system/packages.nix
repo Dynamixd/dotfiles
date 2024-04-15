@@ -6,15 +6,13 @@ let
 in {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    wget
-    curl
     git 
+    lsof
     neofetch 
-    htop 
     btop 
-    libvirt 
     polkit_gnome 
     lm_sensors 
+    zip
     unzip
     unrar
     libnotify
@@ -25,32 +23,19 @@ in {
     lsd
     lshw
     pkg-config
-    sof-firmware
-    alsa-lib
-    apulse
     pavucontrol
-    hugo
     symbola
     noto-fonts-color-emoji
     material-icons
     brightnessctl
-    toybox
-    virt-viewer
-    swappy
-    ripgrep
     appimage-run
     spotify
-    lsd
     neovim
     swaynotificationcenter
     auto-cpufreq
-    grim
-    slurp
-    mako
     discord
     networkmanagerapplet
     # Import Scripts
-    (import ./../scripts/emopicker9000.nix { inherit pkgs; })
     (import ./../scripts/squirtle.nix { inherit pkgs; })
     (import ./../scripts/wallsetter.nix { inherit pkgs; inherit wallpaperDir;
       inherit username; inherit wallpaperGit; })
@@ -60,7 +45,6 @@ in {
     (import ./../scripts/rofi-launcher.nix { inherit pkgs; })
     (import ./../scripts/task-waybar.nix { inherit pkgs; })
     (import ./../scripts/dontkillsteam.nix { inherit pkgs; })
-    (import ./../scripts/screenshootin.nix { inherit pkgs; })
   ];
 
   programs.steam.gamescopeSession.enable = true;

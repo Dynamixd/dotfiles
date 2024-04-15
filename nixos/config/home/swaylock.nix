@@ -35,12 +35,12 @@ in {
     line-clear-color=${palette.base08}
     line-wrong-color=${palette.base08}
     bs-hl-color=${palette.base0D}
-    grace=0
-    grace-no-mouse
-    grace-no-touch
+    grace=10
+    # grace-no-mouse
+    # grace-no-touch
     datestr=%a, %B %e
     timestr=%I:%M %p
-    fade-in=0.1
+    fade-in=10
     ignore-empty-password
   '';
 }

@@ -18,13 +18,13 @@ let
        modifier2 = "ALT";
       in concatStrings [ ''
       monitor=HDMI-A-1,1920x1080@60,0x0,1
-      monitor=eDP-1,1920x1080@144,1920x512,1x
-      windowrule = float, ^(steam)$
-      windowrule = center, ^(steam)$
-      windowrule = size 1280 900, ^(steam)$
-      windowrule = float, ^(discord)$
-      windowrule = center, ^(discord)$
-      windowrule = size 1280 900, ^(discord)$
+      monitor=eDP-1,1920x1080@60,1920x512,1x
+      # windowrule = float, ^(steam)$
+      # windowrule = center, ^(steam)$
+      # windowrule = size 1280 900, ^(steam)$
+      # windowrule = float, ^(discord)$
+      # windowrule = center, ^(discord)$
+      # windowrule = size 1280 900, ^(discord)$
       
       misc {
         force_default_wallpaper = 0 # Set to 0 to disable the anime mascot wallpapers
@@ -67,8 +67,8 @@ let
       env = GDK_BACKEND, wayland
       env = CLUTTER_BACKEND, wayland
       env = SDL_VIDEODRIVER, wayland
-      env = XCURSOR_SIZE, 24
-      env = XCURSOR_THEME, graphite-cursors
+      # env = XCURSOR_SIZE, 24
+      # env = XCURSOR_THEME, graphite-cursors
       env = QT_QPA_PLATFORM, wayland
       env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
       env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
@@ -117,15 +117,16 @@ let
       }
 
       exec-once = $POLKIT_BIN
-      exec-once = dbus-update-activation-environment --systemd --all
       exec-once = systemctl --user import-environment QT_QPA_PLATFORMTHEME WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+      exec-once = dbus-update-activation-environment --systemd --all
       exec-once = hyprctl setcursor graphite-dark 24
       exec-once = waybar
       exec-once = swaync
 #      exec-once = wallsetter
-      exec-once = swayidle -w timeout 720 'swaylock -f' timeout 800 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
-      exec-once = sway-audio-idle-inhibit
+      exec-once = swayidle -w timeout 920 'swaylock -f' timeout 1000 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock -f -c 000000'
+      # exec-once = sway-audio-idle-inhibit
       exec-once = sleep .5 && swww init && swww img ${wallpaperDir}/Rainnight.jpg
+      exec-once = alsactl init
 
       dwindle {
         pseudotile = true
@@ -139,15 +140,15 @@ let
       bindl = ${modifier},T,exec,kitty
       bindr = ${modifier},W,exec,pkill rofi || rofi -show drun
       bind = ${modifier},B,exec,${browser}
-      bind = ${modifier},F,exec,thunar
+      bind = ${modifier}SHIFT,F,exec,thunar
       bind = ${modifier},D,exec,discord --use-angle=vulkan
       bind = ${modifier},Q,exec,dontkillsteam # killactive, kill the window on focus
       bind = ${modifier2}, F4, exec,dontkillsteam # killactive, kill the window on focus
       bind = ${modifier},P,pseudo,
       bind = ${modifier}SHIFT,I,togglesplit,
       bind = ${modifier}, F11,fullscreen,
-      bind = ${modifier}, F12,exec, screenshootin
-      bind = ${modifier}SHIFT,F,togglefloating,
+      bind = ${modifier}, F,fullscreen,
+      bind = ${modifier}SHIFT,F11,togglefloating,
       bind = ${modifier}SHIFT,C,exit,
       bindl = ${modifier2},Tab,cyclenext,          # change focus to another window
       bindl = ${modifier2},Tab,bringactivetotop,   # bring it to the top
